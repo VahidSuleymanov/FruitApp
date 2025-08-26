@@ -1,10 +1,12 @@
 package com.example.FruitApp.service;
 
 import com.example.FruitApp.dto.ValyutaDto;
-import com.example.FruitApp.enums.Statuses;
+import com.example.FruitApp.model.Statuses;
 import com.example.FruitApp.model.Valyutalar;
+import com.example.FruitApp.repository.StatusRepository;
 import com.example.FruitApp.repository.ValyutaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,23 +21,35 @@ public class ValyutaService {
 
     private final ValyutaRepository valyutaRepository;
 
+    private final StatusRepository statusRepository;
+
     public List<Valyutalar> getAllCurrency() {
         return valyutaRepository.findAll();
     }
 
-    public String saveCurrency(ValyutaDto valyutaDto) {
+    public Object saveCurrency(ValyutaDto valyutaDto) {
         Optional<Valyutalar> existingCurrency = valyutaRepository.findByName(valyutaDto.getName());
         if (existingCurrency.isPresent()) {
             return "Bu valyuta artiq sistemde var!";
         }
 
-        Valyutalar valyuta = new Valyutalar();
-        valyuta.setName(valyutaDto.getName());
-        valyuta.setAbbv(valyutaDto.getAbbv());
+        Optional<Valyutalar> existingCurrencyByAbbv = valyutaRepository.findByAbbv(valyutaDto.getAbbv().toUpperCase());
+        if (existingCurrencyByAbbv.isPresent()) {
+            return "Bu abreviatura artiq sistemde var!";
+        }
+
+        Statuses status = statusRepository.findById(valyutaDto.getStatusId())
+                .orElseThrow(() -> new RuntimeException("Status tapılmadı"));
+
+        Valyutalar valyuta = Valyutalar.builder()
+                .name(valyutaDto.getName())
+                .abbv(valyutaDto.getAbbv().toUpperCase())
+                .statusId(status)
+                .build();
 
         valyutaRepository.save(valyuta);
 
-        return "Valyuta ugurla elave edildi!";
+        return "Valyuta ugurla sisteme yazildi!";
     }
 
     public Object getCurrencyById(UUID id) {
@@ -48,63 +62,110 @@ public class ValyutaService {
         }
     }
 
-    public ResponseEntity<String> updateCurrencyById(UUID id, Valyutalar updatedValyuta) {
+    public ResponseEntity<String> updateCurrencyById(UUID id, ValyutaDto updatedValyuta) {
         Optional<Valyutalar> optionalCurrency = valyutaRepository.findById(id);
         if (optionalCurrency.isPresent()) {
             Valyutalar valyuta = optionalCurrency.get();
+
+            Optional<Valyutalar> optionalCurrencyByName = valyutaRepository.findByName(updatedValyuta.getName());
+            if (optionalCurrencyByName.isPresent() && !optionalCurrencyByName.get().getId().equals(valyuta.getId())) {
+                return ResponseEntity.ok("Bu valyuta artıq sistemdə var!");
+            }
             valyuta.setName(updatedValyuta.getName());
-            valyuta.setAbbv(updatedValyuta.getAbbv());
-            valyuta.setStatus(Statuses.valueOf(updatedValyuta.getStatus().toString().toUpperCase()));
+
+            Optional<Valyutalar> optionalCurrencyByAbbv = valyutaRepository.findByAbbv(updatedValyuta.getAbbv().toUpperCase());
+            if (optionalCurrencyByAbbv.isPresent() && !optionalCurrencyByAbbv.get().getId().equals(valyuta.getId())) {
+                return ResponseEntity.ok("Bu abreviatura artıq sistemdə var!");
+            }
+            valyuta.setAbbv(updatedValyuta.getAbbv().toUpperCase());
+
+            Optional<Statuses> statusOptional = statusRepository.findById(updatedValyuta.getStatusId());
+            if (statusOptional.isEmpty()) {
+                return ResponseEntity.ok("Belə bir status mövcud deyil!");
+            }
+            valyuta.setStatusId(statusOptional.get());
+
             valyutaRepository.save(valyuta);
             return ResponseEntity.ok("Valyuta uğurla yeniləndi!");
         } else {
             return ResponseEntity.ok("Valyuta tapılmadı!");
         }
-
     }
 
     public ResponseEntity<String> patchCurrencyById(UUID id, Map<String, Object> updates) {
         Optional<Valyutalar> optionalCurrency = valyutaRepository.findById(id);
-        if (optionalCurrency.isPresent()) {
-            Valyutalar valyuta = optionalCurrency.get();
+        if (optionalCurrency.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Valyuta tapılmadı!");
+        }
 
-            for (Map.Entry<String, Object> entry : updates.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
+        Valyutalar valyuta = optionalCurrency.get();
+        boolean updated = false;
 
-                switch (key) {
-                    case "name" -> {
-                        String newName = (String) value;
-                        Optional<Valyutalar> nameOwner = valyutaRepository.findByName(newName);
-                        if (nameOwner.isPresent() && !nameOwner.get().getId().equals(valyuta.getId())) {
-                            return ResponseEntity.badRequest().body("Bu valyuta artıq sistemdə mövcuddur!");
-                        }
+        for (Map.Entry<String, Object> entry : updates.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            switch (key) {
+                case "name" -> {
+                    if (value == null || !(value instanceof String) || ((String) value).isBlank()) {
+                        break;
+                    }
+                    String newName = (String) value;
+                    Optional<Valyutalar> nameOwner = valyutaRepository.findByName(newName);
+                    if (nameOwner.isPresent() && !nameOwner.get().getId().equals(valyuta.getId())) {
+                        return ResponseEntity.badRequest().body("Bu valyuta artıq sistemdə mövcuddur!");
+                    }
+                    if (!newName.equals(valyuta.getName())) {
                         valyuta.setName(newName);
-                    }
-
-                    case "abbv" -> {
-                        String newAbbv = (String) value;
-                        Optional<Valyutalar> abbvOwner = valyutaRepository.findByAbbv(newAbbv);
-                        if (abbvOwner.isPresent() && !abbvOwner.get().getId().equals(valyuta.getId())) {
-                            return ResponseEntity.badRequest().body("Bu abbriviyatura artıq sistemdə mövcuddur!");
-                        }
-                        valyuta.setAbbv(newAbbv); // düzəliş burada
-                    }
-
-                    case "status" -> {
-                        try {
-                            valyuta.setStatus(Statuses.valueOf(value.toString().toUpperCase()));
-                        } catch (IllegalArgumentException e) {
-                            return ResponseEntity.badRequest().body("Düzgün status dəyəri göndərilməyib.");
-                        }
+                        updated = true;
                     }
                 }
-            }
 
+                case "abbv" -> {
+                    if (value == null || !(value instanceof String) || ((String) value).isBlank()) {
+                        break;
+                    }
+                    String newAbbv = ((String) value).toUpperCase();
+                    Optional<Valyutalar> abbvOwner = valyutaRepository.findByAbbv(newAbbv);
+                    if (abbvOwner.isPresent() && !abbvOwner.get().getId().equals(valyuta.getId())) {
+                        return ResponseEntity.badRequest().body("Bu abreviatura artıq sistemdə mövcuddur!");
+                    }
+                    if (!newAbbv.equals(valyuta.getAbbv())) {
+                        valyuta.setAbbv(newAbbv);
+                        updated = true;
+                    }
+                }
+
+                case "statusId" -> {
+                    if (value == null || value.toString().isBlank()) {
+                        break;
+                    }
+                    try {
+                        UUID statusId = UUID.fromString(value.toString());
+                        Optional<Statuses> optionalStatus = statusRepository.findById(statusId);
+                        if (optionalStatus.isEmpty()) {
+                            return ResponseEntity.badRequest().body("Belə bir status mövcud deyil!");
+                        }
+                        if (!optionalStatus.get().equals(valyuta.getStatusId())) {
+                            valyuta.setStatusId(optionalStatus.get());
+                            updated = true;
+                        }
+                    } catch (IllegalArgumentException e) {
+                        return ResponseEntity.badRequest().body("Status ID düzgün formatda deyil!");
+                    }
+                }
+
+                default -> {
+                    return ResponseEntity.badRequest().body("Naməlum sahə: " + key);
+                }
+            }
+        }
+
+        if (updated) {
             valyutaRepository.save(valyuta);
             return ResponseEntity.ok("Valyuta məlumatları qismən yeniləndi!");
         } else {
-            return ResponseEntity.ok("Valyuta tapılmadı!");
+            return ResponseEntity.ok("Heç bir məlumat yenilənmədi.");
         }
     }
 

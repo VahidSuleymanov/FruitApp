@@ -1,0 +1,1546 @@
+{
+	"info": {
+		"_postman_id": "b548dc68-91d4-4add-8299-e6d27a0de98d",
+		"name": "FruitApp",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44624077",
+		"_collection_link": "https://vasyaslay.postman.co/workspace/Vasya-Slay's-Workspace~87f082e8-2c48-4a5e-8eb0-52187fa99ddb/collection/44624077-b548dc68-91d4-4add-8299-e6d27a0de98d?action=share&source=collection_link&creator=44624077"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Users Setings",
+					"item": [
+						{
+							"name": "Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/users",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UserById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/users/2b3d8c86-a17d-4d03-a998-d7a7be074639",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"users",
+										"2b3d8c86-a17d-4d03-a998-d7a7be074639"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UserById",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/users/2b3d8c86-a17d-4d03-a998-d7a7be074639",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"users",
+										"2b3d8c86-a17d-4d03-a998-d7a7be074639"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UserById",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/users/6bcefffb-34a9-4882-98e0-594a2bc08fce",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"users",
+										"6bcefffb-34a9-4882-98e0-594a2bc08fce"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/users/ab388ed3-b7aa-4500-997c-128fa6abcd3d",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"users",
+										"ab388ed3-b7aa-4500-997c-128fa6abcd3d"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SignUp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.environment.set(\"jwt_token\", jsonData.token);",
+									"pm.environment.set(\"refresh_token\", jsonData.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"confirmPassword\": \"\",\r\n  \"rememberPassword\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}/signUp",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"signUp"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.environment.set(\"jwt_token\", jsonData.token);",
+									"pm.environment.set(\"refresh_token\", jsonData.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"rememberPassword\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}/login",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"jwt_token\", jsonData.token);\r",
+									"pm.environment.set(\"refresh_token\", jsonData.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"refreshToken\": \"{{refresh_token}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}/refreshToken",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.environment.set(\"jwt_token\", jsonData.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}/forgot-password/request",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"forgot-password",
+								"request"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "OTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"jwt_token\", jsonData.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"otp\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}/forgot-password/verify-otp",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"forgot-password",
+								"verify-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"newPassword\" : \"\",\r\n    \"confirmPassword\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}/forgot-password/reset",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"forgot-password",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Fruits Setings",
+					"item": [
+						{
+							"name": "FruitById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/fruits/24a050a9-0c1b-4535-b0ac-c8978cbff90a",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"fruits",
+										"24a050a9-0c1b-4535-b0ac-c8978cbff90a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fruits",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"qiymet\": 0,\r\n  \"miqdar\": 0,\r\n  \"kataqoriyaId\": \"\",\r\n  \"valyutaId\": \"\",\r\n  \"kemiyyetId\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/fruits",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"fruits"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FruitsById",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"qiymet\": 0,\r\n  \"miqdar\": 0,\r\n  \"kataqoriyaId\": \"\",\r\n  \"valyutaId\": \"\",\r\n  \"kemiyyetId\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/fruits/24a050a9-0c1b-4535-b0ac-c8978cbff90a",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"fruits",
+										"24a050a9-0c1b-4535-b0ac-c8978cbff90a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FruitsById",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"miqdar\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/fruits/39adf0d8-8f3f-465c-bc1a-20d11cc3d8c8",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"fruits",
+										"39adf0d8-8f3f-465c-bc1a-20d11cc3d8c8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FruitsById",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/fruits/7ae288e6-e740-4952-b4cd-12c1bedac6cf",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"fruits",
+										"7ae288e6-e740-4952-b4cd-12c1bedac6cf"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fruits",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/fruits/search?keyword=&page=0&size=5",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"fruits",
+								"search"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "My Cart",
+			"item": [
+				{
+					"name": "Count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/sebet/count",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"sebet",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Sebet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/sebet?page=0&size=2",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"sebet"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sebet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/sebet/137726c9-ac4c-4113-8430-bd726712fc96",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"sebet",
+								"137726c9-ac4c-4113-8430-bd726712fc96"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Increase",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/sebet/increase/b48b86ae-754d-498f-9e8c-156b4068dc63",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"sebet",
+								"increase",
+								"b48b86ae-754d-498f-9e8c-156b4068dc63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Decrease",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/sebet/decrease/b48b86ae-754d-498f-9e8c-156b4068dc63",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"sebet",
+								"decrease",
+								"b48b86ae-754d-498f-9e8c-156b4068dc63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sebet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/sebet/5a766f7e-0653-4ecc-b288-2f72035264e6",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"sebet",
+								"5a766f7e-0653-4ecc-b288-2f72035264e6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total Price",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"total_Price\", jsonData.totalPrice);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/sebet/totalPrice",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"sebet",
+								"totalPrice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checkout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/sebet/checkout",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"sebet",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment Method",
+			"item": [
+				{
+					"name": "Payment System",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}/sistemler",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"sistemler"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nameOnCart\": \"\",\r\n  \"cardNumber\": \"\",\r\n  \"expiryDate\": \"\",\r\n  \"cvv\": \"\",\r\n  \"totalPrice\": {{total_Price}},\r\n  \"saveThisCart\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}/payment",
+							"host": [
+								"{{base_url}}{{version}}"
+							],
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Other Setings",
+			"item": [
+				{
+					"name": "Status Setings",
+					"item": [
+						{
+							"name": "Status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/status",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "StatusByid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/status",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/status",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "StatusById",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/status",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "StatusById",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/status",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "StatusById",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"qiymet\": 2.5,\r\n  \"miqdar\": 100,\r\n  \"kataqoriyaId\": \"\",\r\n  \"valyutaId\": \"\",\r\n  \"kemiyyetId\": \"\",\r\n  \"statusId\": \"\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/status",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Kataqoriya Setings",
+					"item": [
+						{
+							"name": "Kataqoriya",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/kataqoriya",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kataqoriya"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "KataqoriyaByid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/kataqoriya",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kataqoriya"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Kataqoriya",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/kataqoriya",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kataqoriya"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "KataqoriyaById",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/kataqoriya",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kataqoriya"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "KataqoriyaById",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/kataqoriya",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kataqoriya"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "KataqoriyaById",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"qiymet\": 2.5,\r\n  \"miqdar\": 100,\r\n  \"kataqoriyaId\": \"\",\r\n  \"valyutaId\": \"\",\r\n  \"kemiyyetId\": \"\",\r\n  \"statusId\": \"\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/kataqoriya",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kataqoriya"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Kemiyyet Setings",
+					"item": [
+						{
+							"name": "Kemiyyet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/kemiyyet",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kemiyyet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "KemiyyetByid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/kemiyyet",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kemiyyet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Kemiyyet",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"abbv\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/kemiyyet",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kemiyyet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "KemiyyetById",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"abbv\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/kemiyyet",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kemiyyet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "KemiyyetById",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"abbv\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/kemiyyet",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kemiyyet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "KemiyyetById",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"qiymet\": 2.5,\r\n  \"miqdar\": 100,\r\n  \"kataqoriyaId\": \"\",\r\n  \"valyutaId\": \"\",\r\n  \"kemiyyetId\": \"\",\r\n  \"statusId\": \"\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/kemiyyet",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"kemiyyet"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Valyuta Setings",
+					"item": [
+						{
+							"name": "Valyuta",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/valyuta",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"valyuta"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ValyutaById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/valyuta",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"valyuta"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Valyuta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"abbv\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/valyuta",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"valyuta"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ValyutaById",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"abbv\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/valyuta",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"valyuta"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ValyutaById",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/valyuta/051d12cc-9262-4b5f-89e9-486bea7bcbbc",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"valyuta",
+										"051d12cc-9262-4b5f-89e9-486bea7bcbbc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ValyutaById",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"qiymet\": 2.5,\r\n  \"miqdar\": 100,\r\n  \"kataqoriyaId\": \"\",\r\n  \"valyutaId\": \"\",\r\n  \"kemiyyetId\": \"\",\r\n  \"statusId\": \"\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/valyuta",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"valyuta"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Sekil Setings",
+					"item": [
+						{
+							"name": "Sekil",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/sekil",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"sekil"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SekilById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{version}}/sekil",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"sekil"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sekil",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"fruitsId\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/sekil",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"sekil"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SekilById",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"fruitsId\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/sekil",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"sekil"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SekilById",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"fruitsId\": \"\",\r\n  \"statusId\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/sekil",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"sekil"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SekilById",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"\",\r\n  \"qiymet\": 2.5,\r\n  \"miqdar\": 100,\r\n  \"kataqoriyaId\": \"\",\r\n  \"valyutaId\": \"\",\r\n  \"kemiyyetId\": \"\",\r\n  \"statusId\": \"\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}{{version}}/sekil",
+									"host": [
+										"{{base_url}}{{version}}"
+									],
+									"path": [
+										"sekil"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8090"
+		},
+		{
+			"key": "version",
+			"value": "/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "8080",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "Bearer ",
+			"type": "string"
+		}
+	]
+}

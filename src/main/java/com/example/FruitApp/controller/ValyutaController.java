@@ -3,6 +3,7 @@ package com.example.FruitApp.controller;
 import com.example.FruitApp.dto.ValyutaDto;
 import com.example.FruitApp.model.Valyutalar;
 import com.example.FruitApp.service.ValyutaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +14,14 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/valyuta")
+@RequestMapping("/api/v1/valyuta")
 @RequiredArgsConstructor
 public class ValyutaController {
 
     private final ValyutaService valyutaService;
 
     @GetMapping
-    public List<Valyutalar> getAllFruits() {
+    public List<Valyutalar> getAllCurrency() {
         return valyutaService.getAllCurrency();
     }
 
@@ -30,12 +31,12 @@ public class ValyutaController {
     }
 
     @PostMapping
-    public String saveCurrency(@RequestBody ValyutaDto valyutaDto) {
+    public Object saveCurrency(@Valid @RequestBody ValyutaDto valyutaDto) {
         return valyutaService.saveCurrency(valyutaDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCurrency(@PathVariable UUID id, @RequestBody Valyutalar updatedCurrency) {
+    public ResponseEntity<String> updateCurrency(@PathVariable UUID id, @Valid @RequestBody ValyutaDto updatedCurrency) {
         return valyutaService.updateCurrencyById(id, updatedCurrency);
     }
 

@@ -1,6 +1,6 @@
 package com.example.FruitApp.service;
 
-import com.example.FruitApp.dto.UserLoginDto;
+import com.example.FruitApp.dto.userDto.UserLoginDto;
 import com.example.FruitApp.dto.TokenDto;
 import com.example.FruitApp.model.User;
 import com.example.FruitApp.repository.UserRepository;
@@ -18,13 +18,9 @@ import java.util.Optional;
 public class LoginService {
 
     private final UserRepository userRepository;
-
     private final JwtService jwtService;
-
     private final AuthenticationManager authenticationManager;
-
     private final PasswordEncoder passwordEncoder;
-
 
     public Object auth(UserLoginDto userRequest) {
         Optional<User> existingUser = userRepository.findByEmail(userRequest.getEmail());
@@ -44,9 +40,17 @@ public class LoginService {
                 )
         );
 
+        String accessToken = jwtService.generateAccessToken(user);
 
-        String token = jwtService.generateToken(user);
+        String refreshToken = null;
+        if (userRequest.isRememberPassword()) {
+            refreshToken = jwtService.generateRefreshToken(user);
+        }
 
-        return TokenDto.builder().token(token).build();
+        return TokenDto.builder()
+                .token(accessToken)
+                .refreshToken(refreshToken)
+                .build();
     }
 }
+

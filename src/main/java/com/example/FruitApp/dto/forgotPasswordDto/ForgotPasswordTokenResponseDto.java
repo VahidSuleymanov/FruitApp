@@ -1,4 +1,4 @@
-package com.example.FruitApp.dto;
+package com.example.FruitApp.dto.forgotPasswordDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserLoginDto {
+public class ForgotPasswordTokenResponseDto {
 
-    private String password;
-    private String email;
-    private boolean rememberPassword;
+    private String token;
+
 }

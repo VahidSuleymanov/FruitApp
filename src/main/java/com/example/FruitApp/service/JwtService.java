@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 @Service
@@ -20,6 +21,12 @@ public class JwtService {
 
     @Value("${security.jwt.secret}")
     private String SECRET_KEY;
+
+    @Value("${security.jwt.access-expiration}")
+    private long accessExpiration;
+
+    @Value("${security.jwt.refresh-expiration}")
+    private long refreshExpiration;
 
     public String findUsername(String token) {
         return exportToken(token, Claims::getSubject);
@@ -53,20 +60,59 @@ public class JwtService {
                 && !exportToken(jwt, Claims::getExpiration).before(new Date()));
     }
 
-    public String generateToken(UserDetails user) {
-        String email;
-        if (user instanceof User) {
-            email = ((User) user).getEmail();
-        } else {
-            email = user.getUsername();
-        }
+    public String generateAccessToken(UserDetails user) {
+        return generateToken(user, false);
+    }
+
+    public String generateRefreshToken(UserDetails user) {
+        return generateToken(user, true);
+    }
+
+    public String generateToken(UserDetails user, boolean isRefresh) {
+        long expirationTime = isRefresh ? refreshExpiration : accessExpiration;
+        String email = (user instanceof User) ? ((User) user).getEmail() : user.getUsername();
+        String userId = (user instanceof User) ? ((User) user).getId().toString() : "";
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId);
 
         return Jwts.builder()
-                .setClaims(new HashMap<>())
+                .setClaims(claims)
                 .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
+    public String extractUserId(String token) {
+        return exportToken(token, claims -> claims.get("userId", String.class));
+    }
+
+    public String generateTokenWithClaims(String email, Map<String, Object> claims) {
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(email)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 300000)) // 5 dəqiqə
+                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    public String extractEmail(String token) {
+        return exportToken(token, Claims::getSubject);
+    }
+
 }

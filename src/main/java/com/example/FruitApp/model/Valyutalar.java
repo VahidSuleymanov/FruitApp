@@ -1,6 +1,5 @@
 package com.example.FruitApp.model;
 
-import com.example.FruitApp.enums.Statuses;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +26,9 @@ public class Valyutalar {
     private String name;
     private String abbv;
 
-    @Enumerated(EnumType.STRING)
-    private Statuses status;
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Statuses statusId;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

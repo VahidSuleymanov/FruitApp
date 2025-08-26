@@ -1,11 +1,11 @@
 server:
-  port: 8090
+  port: 8080
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:9710/vahid
+    url: jdbc:postgresql://localhost:5432/fruitapp
     username: postgres
-    password: vasya6991
+    password: yourpassword
     driverClassName: org.postgresql.Driver
 
   jpa:
@@ -16,6 +16,28 @@ spring:
       hibernate:
         format_sql: true
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: # Gmail ünvanın
+    password: # Google App Password (adi gmail şifrən yox!)
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
 security:
   jwt:
     secret: "hghsgdgshdfsdsfdgscgxfcsffgdfgsgdhgshhdyeydfgedfbbfhbhfbhfdghfgd"
+    access-expiration: 300000      # 5 dəqiqə = 5 * 60 * 1000 ms
+    refresh-expiration: 3600000    # 1 saat   = 60 * 60 * 1000 ms
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+

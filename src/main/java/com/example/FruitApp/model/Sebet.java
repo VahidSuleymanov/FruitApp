@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -22,7 +23,36 @@ public class Sebet {
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
-    private UUID user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
+
+    @ManyToOne
+    @JoinColumn(name = "fruit_id")
+    private Fruits fruitId;
+
     private int say;
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Statuses statusId;
+
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+
+    @PrePersist
+    public void prePersist() {
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

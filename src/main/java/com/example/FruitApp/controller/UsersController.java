@@ -1,7 +1,9 @@
 package com.example.FruitApp.controller;
 
+import com.example.FruitApp.dto.userDto.UserUpdateDto;
 import com.example.FruitApp.model.User;
 import com.example.FruitApp.service.UsersService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,7 +15,7 @@ import java.util.UUID;
 
 @RestController
 @PreAuthorize("isAuthenticated()")
-@RequestMapping("/users")
+@RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UsersController {
 
@@ -21,7 +23,7 @@ public class UsersController {
 
 
     @GetMapping
-    public List<User> getAllUser() {
+    public ResponseEntity<List<User>> getAllUser() {
         return usersService.getAllUser();
     }
 
@@ -31,7 +33,7 @@ public class UsersController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable UUID id, @RequestBody User updatedUser) {
+    public ResponseEntity<String> updateUser(@PathVariable UUID id, @Valid @RequestBody UserUpdateDto updatedUser) {
         return usersService.updateUserById(id, updatedUser);
     }
 

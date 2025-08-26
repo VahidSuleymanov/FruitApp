@@ -25,13 +25,30 @@ public class Fruits {
 
     private String name;
     private double qiymet;
-    private double miqdar;
+    private int miqdar;
+
+    @ManyToOne
+    @JoinColumn(name = "kataqoriya_id")
+    private Kataqoriyalar kataqoriyaId;
+
+    @ManyToOne
+    @JoinColumn(name = "kemiyyet_id")
+    private Kemiyyetler kemiyyetId;
+
+    @ManyToOne
+    @JoinColumn(name = "valyuta_id")
+    private Valyutalar valyutaId;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Statuses statusId;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
 
     @PrePersist
     public void prePersist() {
@@ -44,5 +61,4 @@ public class Fruits {
     public void preUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
-
 }

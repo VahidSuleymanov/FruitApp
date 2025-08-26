@@ -1,10 +1,10 @@
 package com.example.FruitApp.repository;
 
 import com.example.FruitApp.model.Fruits;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-
 import java.util.Optional;
 import java.util.UUID;
 
@@ -12,5 +12,6 @@ import java.util.UUID;
 public interface FruitsRepository extends JpaRepository<Fruits, UUID> {
 
     Optional<Fruits> findByName(String name);
+    Page<Fruits> findByNameContainingIgnoreCase(String keyword, Pageable pageable);
 
 }
